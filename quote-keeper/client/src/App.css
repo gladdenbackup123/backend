@@ -1,0 +1,101 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.app-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.input {
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #dcdcdc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input:focus {
+  border-color: #3498db;
+}
+
+.submit-btn {
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #2980b9;
+}
+
+.divider {
+  margin: 30px 0;
+  border: none;
+  height: 1px;
+  background: #ddd;
+}
+
+.subheading {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #34495e;
+}
+
+.quote-list {
+  list-style: none;
+  padding: 0;
+}
+
+.quote-card {
+  background: #ecf0f1;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-left: 5px solid #3498db;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.quote-card:hover {
+  transform: scale(1.02);
+}
+
+.quote-text {
+  font-size: 1.2rem;
+  margin: 0 0 10px;
+  color: #2d3436;
+}
+
+.quote-author {
+  text-align: right;
+  font-style: italic;
+  color: #636e72;
+}

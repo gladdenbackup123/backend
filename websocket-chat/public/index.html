@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Chat App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            max-height: 600px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 16px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #chatBox {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        #chatBox p {
+            background: #e0f7fa;
+            margin: 8px 0;
+            padding: 10px 14px;
+            border-radius: 8px;
+            max-width: 75%;
+        }
+
+        .input-area {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input-area button {
+            margin-left: 10px;
+            padding: 10px 16px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .input-area button:hover {
+            background-color: #357ab8;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">💬 WebSocket Chat</div>
+        <div id="chatBox"></div>
+        <div class="input-area">
+            <input id="msginput" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:3000');
+
+        socket.onmessage = (event) => {
+            const chatBox = document.getElementById('chatBox');
+
+            if (event.data instanceof Blob) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    appendMessage(reader.result);
+                };
+                reader.readAsText(event.data);
+            } else {
+                appendMessage(event.data);
+            }
+        };
+
+        function appendMessage(message) {
+            const chatBox = document.getElementById('chatBox');
+            const p = document.createElement('p');
+            p.textContent = message;
+            chatBox.appendChild(p);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('msginput');
+            const message = input.value.trim();
+            if (message !== '') {
+                socket.send(message);
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
